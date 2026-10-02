@@ -1,0 +1,53 @@
+/* Simple aesthetic styles for HelpDeskHub landing */
+:root{
+    --brand:#1752ff;
+    --accent:#00bcd4;
+    --muted:#6c757d;
+}
+body{
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%);
+    color: #222;
+}
+.header-hero{
+    padding: 4rem 0;
+    background: linear-gradient(90deg, rgba(23,82,255,0.06), rgba(0,188,212,0.03));
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+nav.navbar{
+    background: #fff;
+}
+nav .navbar-brand{ font-weight:700; color:var(--brand); }
+nav .nav-link{ color:#333; }
+.hero-title{
+    font-size: 2.25rem;
+    font-weight:700;
+    color: var(--brand);
+}
+.hero-sub{
+    color: var(--muted);
+    margin-top: 0.5rem;
+}
+.role-cards{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+}
+.role-card{
+    flex:1 1 220px;
+    background: white;
+    border-radius: 12px;
+    padding:1.25rem;
+    box-shadow: 0 6px 20px rgba(23,82,255,0.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+.role-card:hover{ transform: translateY(-6px); box-shadow:0 16px 40px rgba(23,82,255,0.08); }
+.role-card h3{ margin-top:0; color:#163a8a }
+.role-card p{ color:var(--muted); }
+.role-actions{ margin-top:1rem; display:flex; gap:.5rem }
+.btn-primary-custom{ background:var(--brand); border-color:var(--brand); color:#fff }
+.btn-outline-custom{ border-color:var(--brand); color:var(--brand); background:transparent }
+
+.footer{ padding:1rem 0 }
+
+@media(max-width:600px){ .role-cards{ flex-direction:column } }

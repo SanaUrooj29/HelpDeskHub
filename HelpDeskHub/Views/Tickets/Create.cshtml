@@ -1,0 +1,100 @@
+@model HelpDeskHub.Models.Ticket
+
+@{
+    ViewData["Title"] = "Create Ticket";
+}
+
+<h1>Create Ticket</h1>
+
+@if (ViewBag.Errors != null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var err in (List<string>)ViewBag.Errors)
+            {
+                <li>@err</li>
+            }
+        </ul>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8">
+
+        <form action="/Tickets/Create"
+              method="post"
+              novalidate>
+
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label for="Title" class="form-label">
+                    Title
+                </label>
+
+                <input id="Title"
+                       name="Title"
+                       type="text"
+                       class="form-control"
+                       value="@Model?.Title" />
+            </div>
+
+            <div class="mb-3">
+                <label for="Description"
+                       class="form-label">
+                    Description
+                </label>
+
+                <textarea id="Description"
+                          name="Description"
+                          class="form-control"
+                          rows="6">@Model?.Description</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="CategoryId"
+                       class="form-label">
+                    Category
+                </label>
+
+                @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+
+                <select id="CategoryId"
+                        name="CategoryId"
+                        class="form-select"
+                        required>
+
+                    <option value="">
+                        -- Select Category --
+                    </option>
+
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        var isSelected = Model != null && Model.CategoryId == category.Id;
+                        if (isSelected)
+                        {
+                            <option value="@category.Id" selected="selected">@category.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    }
+
+                </select>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Create Ticket
+            </button>
+
+            <a href="/Tickets"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+</div>

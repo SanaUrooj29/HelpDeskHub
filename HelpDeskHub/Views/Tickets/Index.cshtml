@@ -1,0 +1,77 @@
+@model IEnumerable<HelpDeskHub.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Tickets</h1>
+
+    <a asp-action="Create"
+       class="btn btn-primary">
+        Create New Ticket
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No tickets have been created yet.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach (var ticket in Model)
+        {
+            <tr>
+
+                <td>
+                    @ticket.Title
+                </td>
+
+                <td>
+                    @ticket.Category.Name
+                </td>
+
+                <td>
+                    @ticket.Priority
+                </td>
+
+                <td>
+                    @ticket.Status
+                </td>
+
+                <td>
+                    @ticket.CreatedAt.ToLocalTime()
+                </td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@ticket.Id"
+                       class="btn btn-sm btn-info">
+                        Details
+                    </a>
+                </td>
+
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+}

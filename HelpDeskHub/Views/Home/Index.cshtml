@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="header-hero container">
+    <div class="row align-items-center">
+        <div class="col-md-7">
+            <h1 class="hero-title">Welcome to HelpDeskHub</h1>
+            <p class="hero-sub">Choose your role to continue. The experience and available actions will be tailored to your role.</p>
+        </div>
+        <div class="col-md-5 text-md-end">
+            <img src="/img/helpdesk-illustration.svg" alt="Helpdesk" style="max-width:220px; opacity:.95" />
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="role-cards">
+        <div class="role-card">
+            <h3>Employee</h3>
+            <p>Create and track tickets, add comments, and manage your own requests.</p>
+            <div class="role-actions">
+                <a class="btn btn-primary btn-primary-custom" href="/Identity/Account/Register?role=Employee">Register</a>
+                <a class="btn btn-outline btn-outline-custom" href="/Identity/Account/Login?role=Employee">Login</a>
+            </div>
+        </div>
+
+        <div class="role-card">
+            <h3>Support Agent</h3>
+            <p>View assigned and unassigned tickets, take ownership, and resolve issues.</p>
+            <div class="role-actions">
+                <a class="btn btn-primary btn-primary-custom" href="/Identity/Account/Register?role=SupportAgent">Register</a>
+                <a class="btn btn-outline btn-outline-custom" href="/Identity/Account/Login?role=SupportAgent">Login</a>
+            </div>
+        </div>
+
+        <div class="role-card">
+            <h3>Administrator</h3>
+            <p>Manage users, categories and oversee tickets and system activity.</p>
+            <div class="role-actions">
+                <a class="btn btn-primary btn-primary-custom" href="/Identity/Account/Register?role=Administrator">Register</a>
+                <a class="btn btn-outline btn-outline-custom" href="/Identity/Account/Login?role=Administrator">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center text-muted">
+        <small>If you already have an account, please use Login. Administrators may use the seeded account: admin@helpdesk.local (password: Admin123!).</small>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        // store selected role when user clicks register/login (for future use)
+        document.querySelectorAll('a[href*="role="]').forEach(a=>{
+            a.addEventListener('click', function(){
+                try{ localStorage.setItem('preferredRole', new URL(this.href, location.origin).searchParams.get('role')); }catch(e){}
+            });
+        });
+    </script>
+}

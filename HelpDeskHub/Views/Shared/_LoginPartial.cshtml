@@ -1,0 +1,28 @@
+@using Microsoft.AspNetCore.Identity
+@using HelpDeskHub
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<div class="navbar-nav">
+	@if (SignInManager.IsSignedIn(User))
+	{
+		<div class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				@User.Identity.Name
+			</a>
+			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+				<li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Manage Account</a></li>
+				<li>
+					<form class="dropdown-item p-0" asp-area="Identity" asp-page="/Account/Logout" method="post" id="logoutForm">
+						<button type="submit" class="btn btn-link w-100 text-start">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	}
+	else
+	{
+		<a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+		<a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+	}
+</div>
